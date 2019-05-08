@@ -1,2 +1,2 @@
-# easyapi-fapiao-order-modal
-EasyAPI发票管理订单模块集成页面（包含Web端和移动端）
+# EasyAPI发票管理订单模块集成页面（包含Web端和移动端）
+本模块主要是在随订单开票场景下使用
