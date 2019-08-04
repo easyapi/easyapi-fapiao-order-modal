@@ -2,105 +2,106 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="css/web.css">
-	<title>开具发票</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/web.css">
+  <title>开具发票</title>
 </head>
 
 <body>
-	<div id="app" class="container">
-		<div class="partOne">
-			<p class="">
-				<span class="color-change" style="border: solid 1px #1cc1d6;">电子普通发票</span>
-				<!-- <span>增值税专用发票</span> -->
-			</p>
-			<div class="tabChange">
-				<span>订单开票</span>
-				<div @click="tabChange(0)">
-					<p>
-						<span v-bind:class="{ selected:0==current}"></span>
-					</p>
-					<span>单位</span>
-				</div>
-				<div @click="tabChange(1)">
-					<p>
-						<span v-bind:class="{ selected:1==current}"></span>
-					</p>
-					<span>个人</span>
-				</div>
-			</div>
-			<div v-if="willShow">
-				<div class="InvoiceRise">
-					<span>发票抬头</span>
-					<p>
-						<input type="text" v-model="name" placeholder="请输入发票抬头" @keyup="searchCompanyTitleList">
-						<i @click="dropDown"></i>
-					</p>
-					<div class="drop-down" v-if="dropDownShow">
-						<p v-for="(item,index) in searchList" :key="index" @click="chooseCompanyTitle(index)" v-html="lineFeed(item)"></p>
-					</div>
-					
-				</div>
-				<div class="DutyParagraph public-r">
-					<span>税号</span>
-					<p>
-						<input type="text" placeholder="请输入税号" v-model="taxNumber">
-					</p>
-				</div>
-				<div class="public-r">
-					<span>电话</span>
-					<p>
-						<input type="text" placeholder="请输入电话" v-model="phone">
-					</p>
-				</div>
-				<div class="public-r">
-					<span>地址</span>
-					<p>
-						<input type="text" placeholder="请输入地址" v-model="address">
-					</p>
-				</div>
-				<div class="public-r">
-					<span>开户行</span>
-					<p>
-						<input type="text" placeholder="请输入开户行" v-model="bank">
-					</p>
-				</div>
-				<div class="public-r">
-					<span>开户行账号</span>
-					<p>
-						<input type="text" placeholder="请输入开户行账号" v-model="bankAccount">
-					</p>
-				</div>
-			</div>
-			<p>
-				<span>发票内容</span>
-				<span class="color-change">商品明细</span>
-			</p>
-		</div>
-		<div class="titleReceive">
-			<p>接收方式</p>
-		</div>
+<div id="app" class="container">
+  <div class="partOne">
+    <p class="">
+      <span class="color-change" style="border: solid 1px #1cc1d6;">电子普通发票</span>
+      <!-- <span>增值税专用发票</span> -->
+    </p>
+    <div class="tabChange">
+      <span>订单开票</span>
+      <div @click="tabChange(0)">
+        <p>
+          <span v-bind:class="{ selected:0==current}"></span>
+        </p>
+        <span>单位</span>
+      </div>
+      <div @click="tabChange(1)">
+        <p>
+          <span v-bind:class="{ selected:1==current}"></span>
+        </p>
+        <span>个人</span>
+      </div>
+    </div>
+    <div v-if="willShow">
+      <div class="InvoiceRise">
+        <span>发票抬头</span>
+        <p>
+          <input type="text" v-model="name" placeholder="请输入发票抬头" @keyup="searchCompanyTitleList">
+          <i @click="dropDown"></i>
+        </p>
+        <div class="drop-down" v-if="dropDownShow">
+          <p v-for="(item,index) in searchList" :key="index" @click="chooseCompanyTitle(index)"
+             v-html="lineFeed(item)"></p>
+        </div>
 
-		<div class="partTwo">
-			<p>
-				<span>手机号码</span>
-				<span><input type="text" v-model="mobile"></span>
-			</p>
-			<p>
-				<span>邮箱</span>
-				<span><input type="text" v-model="email"></span>
-			</p>
-			<p>
-				<span class="bc-color-change" @click="saveAndUpload">保存</span>
-			</p>
-		</div>
-	</div>
-	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-	
-	<script src="js/web-order.js"></script>
+      </div>
+      <div class="DutyParagraph public-r">
+        <span>税号</span>
+        <p>
+          <input type="text" placeholder="请输入税号" v-model="taxNumber">
+        </p>
+      </div>
+      <div class="public-r">
+        <span>电话</span>
+        <p>
+          <input type="text" placeholder="请输入电话" v-model="phone">
+        </p>
+      </div>
+      <div class="public-r">
+        <span>地址</span>
+        <p>
+          <input type="text" placeholder="请输入地址" v-model="address">
+        </p>
+      </div>
+      <div class="public-r">
+        <span>开户行</span>
+        <p>
+          <input type="text" placeholder="请输入开户行" v-model="bank">
+        </p>
+      </div>
+      <div class="public-r">
+        <span>开户行账号</span>
+        <p>
+          <input type="text" placeholder="请输入开户行账号" v-model="bankAccount">
+        </p>
+      </div>
+    </div>
+    <p>
+      <span>发票内容</span>
+      <span class="color-change">商品明细</span>
+    </p>
+  </div>
+  <div class="titleReceive">
+    <p>接收方式</p>
+  </div>
+
+  <div class="partTwo">
+    <p>
+      <span>手机号码</span>
+      <span><input type="text" v-model="mobile"></span>
+    </p>
+    <p>
+      <span>邮箱</span>
+      <span><input type="text" v-model="email"></span>
+    </p>
+    <p>
+      <span class="bc-color-change" @click="saveAndUpload">保存</span>
+    </p>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script src="js/web-order.js"></script>
 </body>
 
 </html>
