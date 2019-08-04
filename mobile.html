@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="css/mobile.css">
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-	<title>model</title>
+	<title>开具发票</title>
 </head>
 
 <body>
@@ -41,16 +41,16 @@
 				<div class="InvoiceRise">
 					<span>发票抬头</span>
 					<p>
-						<input type="text" v-model="purchaserName" placeholder="请输入发票抬头" @keyup="searchRiseList">
+						<input type="text" v-model="name" placeholder="请输入发票抬头" @keyup="searchCompanyTitleList">
 						<i @click="dropDown"></i>
 					</p>
 					<div class="drop-down" v-if="dropDownShow">
-						<p v-for="(item,index) in searchList" :key="index" @click="chooseRise(index)" v-html="lineFeed(item)"></p>
+						<p v-for="(item,index) in searchList" :key="index" @click="chooseCompanyTitle(index)" v-html="lineFeed(item)"></p>
 					</div>
 				</div>
 				<div class="DutyParagraph public-r">
 					<span>税号</span>
-					<input type="text" placeholder="请输入税号" v-model="purchaserTaxpayerNumber">
+					<input type="text" placeholder="请输入税号" v-model="taxNumber">
 				</div>
 				<div class="public-r">
 					<span>电话</span>
@@ -62,7 +62,11 @@
 				</div>
 				<div class="public-r">
 					<span>开户行</span>
-					<input type="text" placeholder="请输入开户行" v-model="purchaserBank">
+					<input type="text" placeholder="请输入开户行" v-model="bank">
+				</div>
+				<div class="public-r">
+					<span>开户行账号</span>
+					<input type="text" placeholder="请输入开户行账号" v-model="bankAccount">
 				</div>
 			</div>
 			<div class="invoice-content">

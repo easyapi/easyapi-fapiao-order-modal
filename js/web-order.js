@@ -54,7 +54,7 @@ var vm = new Vue({
         // 抬头和税号拼接换行
         lineFeed(v){
             if(!v.kpName){
-                return `<span>${v.purchaserName}<br/>${v.purchaserTaxpayerNumber}</span>`;
+                return `<span>${v.name}<br/>${v.taxNumber}</span>`;
             }
                 return `<span>${v.kpName}<br/>${v.kpCode}</span>`;
         },
@@ -77,12 +77,12 @@ var vm = new Vue({
             console.log(this.sendType);
         },
         // 企业抬头查询
-        searchRiseList() {
-            axios.get("https://fapiao-api.easyapi.com/api/invoice/company/codes", {
+        searchCompanyTitleList() {
+            axios.get("https://fapiao-api.easyapi.com/company/codes", {
                 params: {
                     accessToken: this.accessToken,
                     taxNumber: this.taxNumber,
-                    kpName: this.purchaserName
+                    name: this.purchaserName
                 }
             }).then(res => {
                 this.searchList = res.data.content;
@@ -93,19 +93,12 @@ var vm = new Vue({
                 //   MessageBox('提示', error.response.data.message);
             });
         },
-        chooseRise(index) {
-            console.log(index)
+        chooseCompanyTitle(index) {
             this.purchaserName = this.searchList[index].kpName;
-            
             this.address = this.searchList[index].kpAddr;
-            
             this.phone = this.searchList[index].kpTel;
-            
             this.purchaserBank = this.searchList[index].accountBank;
-            
             this.purchaserTaxpayerNumber = this.searchList[index].kpCode;
-            
-            console.log(this.searchList[index]);
             this.dropDownShow = false;
         },
         // 获取用户默认的抬头、接受方式、抬头类型 信息
@@ -113,7 +106,6 @@ var vm = new Vue({
             axios.get("https://fapiao-api.easyapi.com/api/default/" + this.username, {
                 params: {
                     accessToken: this.accessToken,
-                    // username: this.username,
                     taxNumber: this.taxNumber,
                     appKey: this.appKey,
                     appSecret: this.appSecret
@@ -123,11 +115,12 @@ var vm = new Vue({
                 this.type = res.data.content.type;
                 this.email = res.data.content.email;
                 this.mobile = res.data.content.mobile;
-                this.purchaserName = res.data.content.company.purchaserName;
+                this.purchaserName = res.data.content.company.name;
+                this.purchaserTaxpayerNumber = res.data.content.company.taxNumber;
                 this.address = res.data.content.company.address;
                 this.phone = res.data.content.company.phone;
-                this.purchaserBank = res.data.content.company.purchaserBank;
-                this.purchaserTaxpayerNumber = res.data.content.company.purchaserTaxpayerNumber;
+                this.purchaserBank = res.data.content.company.bank;
+                this.purchaserBank = res.data.content.company.bankAccount;
                 if(this.type == "企业"){
                     this.current = 0;
                     this.willShow = true;
@@ -135,25 +128,20 @@ var vm = new Vue({
                     this.willShow = false;
                     this.current = 1;
                 }
-                this.companyID = res.data.content.company.invoiceCompanyId;
-                console.log(this.type)
+                this.companyID = res.data.content.company.companyId;
             }).catch(error => {
                 console.log(error)
             });
         },
         // 获取发票公司抬头列表
         searchCompanies(){
-            axios.get("https://fapiao-api.easyapi.com/api/invoice/companies", {
+            axios.get("https://fapiao-api.easyapi.com/companies", {
                 params: {
                     accessToken: this.accessToken,
-                    username: this.username,
-                    taxNumber: this.taxNumber
+                    username: this.username
                 }
             }).then(res => {
-                console.log(res)
-                // this.defaultList = res.data.content;
-                let defaultList=res.data.content;
-
+                let defaultList = res.data.content;
                 for(let k in defaultList){
                     defaultList[k].kpName = defaultList[k].purchaserName;
                     defaultList[k].kpAddr = defaultList[k].address;
@@ -162,14 +150,12 @@ var vm = new Vue({
                     defaultList[k].kpCode = defaultList[k].purchaserTaxpayerNumber;
                 }
                 this.searchList = defaultList;
-                console.log(this.searchList);
             }).catch(error => {
                 console.log(error)
             });
         },
         // 更新用户的默认抬头、接收方式
         saveAndUpload(){
-            
             this.upResult.email = this.email;
             this.upResult.mobile = this.mobile;
             this.upResult.companyId = this.companyId;
