@@ -35,7 +35,7 @@
       <div class="InvoiceRise">
         <span>发票抬头</span>
         <p>
-          <input type="text" v-model="name" placeholder="请输入发票抬头" @keyup="searchCompanyTitleList">
+          <input type="text" v-model="purchaserName" placeholder="请输入发票抬头" @keyup="searchCompanyTitleList">
           <i @click="dropDown"></i>
         </p>
         <div class="drop-down" v-if="dropDownShow">
@@ -47,7 +47,7 @@
       <div class="DutyParagraph public-r">
         <span>税号</span>
         <p>
-          <input type="text" placeholder="请输入税号" v-model="taxNumber">
+          <input type="text" placeholder="请输入税号" v-model="purchaserTaxpayerNumber">
         </p>
       </div>
       <div class="public-r">
@@ -65,13 +65,13 @@
       <div class="public-r">
         <span>开户行</span>
         <p>
-          <input type="text" placeholder="请输入开户行" v-model="bank">
+          <input type="text" placeholder="请输入开户行" v-model="purchaserBank">
         </p>
       </div>
       <div class="public-r">
-        <span>开户行账号</span>
+        <span>银行账号</span>
         <p>
-          <input type="text" placeholder="请输入开户行账号" v-model="bankAccount">
+          <input type="text" placeholder="请输入开户行账号" v-model="purchaserBankAccount">
         </p>
       </div>
     </div>
@@ -100,8 +100,7 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-<script src="js/web-order.js"></script>
+<script src="js/order.js"></script>
 </body>
 
 </html>
