@@ -169,7 +169,7 @@ var vm = new Vue({
       axios.put("https://fapiao-api.easyapi.com/api/default/" + this.username,
         this.upResult
       ).then(res => {
-        parent.closeInvoiceDialog();
+        parent.postMessage(this.purchaserName + " " + this.purchaserTaxpayerNumber, "https://fapiao-order-modal.easyapi.com");
       }).catch(error => {
         console.log(error);
       });

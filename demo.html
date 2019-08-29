@@ -29,15 +29,18 @@
   <button onclick="showModal()">点击开票</button>
 </div>
 <div class="our-page" id="our-page-modal">
-  <iframe src="web.html" frameborder="0"></iframe>
+  <iframe src="https://fapiao-order-modal.easyapi.com/web.html?taxNumber=91320211MA1WML8X6T&accessToken=55cb56bddcd5d97e028d170ca25bd287&username=22203CED961782AF57FF7FC13E88A964" frameborder="0"></iframe>
 </div>
 </body>
 <script>
-  function closeInvoiceDialog() {
+  window.addEventListener('message', function (e) {
+    if (event.origin !== "https://fapiao-order-modal.easyapi.com")
+      return;
     document.getElementById("our-page-modal").style.display = "none";
     //第3步，可调用 “获取开票用户默认抬头信息” API接口获取用户刚刚保存的开票信息
     //TODO
-  }
+    alert(e.data);
+  });
 
   function showModal() {
     document.getElementById("our-page-modal").style.display = "block";
