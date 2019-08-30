@@ -2,9 +2,9 @@
 <html lang="zh" class="no-js">
 <head>
   <meta charset="UTF-8">
-  <title>示例</title>
+  <title>开票信息弹框填写示例</title>
   <style>
-    .our-page {
+    .order-modal {
       position: fixed;
       top: 0;
       left: 0;
@@ -14,7 +14,7 @@
       display: none;
     }
 
-    .our-page > iframe {
+    .order-modal > iframe {
       width: 560px;
       height: 100%;
       position: absolute;
@@ -28,22 +28,22 @@
 <div>
   <button onclick="showModal()">点击开票</button>
 </div>
-<div class="our-page" id="our-page-modal">
-  <iframe src="https://fapiao-order-modal.easyapi.com/web.html?taxNumber=91320211MA1WML8X6T&accessToken=55cb56bddcd5d97e028d170ca25bd287&username=22203CED961782AF57FF7FC13E88A964" frameborder="0"></iframe>
+<div class="order-modal" id="fapiao-order-modal">
+  <iframe src="https://fapiao-order-modal.easyapi.com/web.html?taxNumber=91320211MA1WML8X6T&accessToken=79f2486841c6f9bc0521e0f162795d44&username=C4CA4238A0B923820DCC509A6F75849B" frameborder="0"></iframe>
 </div>
 </body>
 <script>
-  window.addEventListener('message', function (e) {
+  window.addEventListener('message', function (event) {
+    alert(event.origin);
     if (event.origin !== "https://fapiao-order-modal.easyapi.com")
       return;
-    document.getElementById("our-page-modal").style.display = "none";
-    //第3步，可调用 “获取开票用户默认抬头信息” API接口获取用户刚刚保存的开票信息
-    //TODO
-    alert(e.data);
+    document.getElementById("fapiao-order-modal").style.display = "none";
+    //TODO 显示开票名称在当前页面 event.data
+    alert(event.data);
   });
 
   function showModal() {
-    document.getElementById("our-page-modal").style.display = "block";
+    document.getElementById("fapiao-order-modal").style.display = "block";
   }
 </script>
 </html>

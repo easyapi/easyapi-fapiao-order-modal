@@ -163,13 +163,13 @@ var vm = new Vue({
       this.upResult.accessToken = this.accessToken;
       this.upResult.taxNumber = this.taxNumber;
       this.upResult.type = this.sendType;
-      this.upResult.category = "增值税普通发票";
+      this.upResult.category = "增值税电子普通发票";
       this.upResult.contentType = "商品明细";
       this.upResult.property = "电子";
       axios.put("https://fapiao-api.easyapi.com/api/default/" + this.username,
         this.upResult
       ).then(res => {
-        parent.postMessage(this.purchaserName + " " + this.purchaserTaxpayerNumber, "https://fapiao-order-modal.easyapi.com");
+        window.parent.postMessage(JSON.stringify(this.upResult), "*");
       }).catch(error => {
         console.log(error);
       });
