@@ -18,7 +18,7 @@ var vm = new Vue({
       purchaserBank: '',
       purchaserBankAccount: '',
       companyId: '',
-      upResult: {},
+      request: {},
       searchList: [],
       sendType: ''
     }
@@ -150,26 +150,26 @@ var vm = new Vue({
     },
     // 更新用户的默认抬头、接收方式
     saveAndUpload() {
-      this.upResult.email = this.email;
-      this.upResult.mobile = this.mobile;
-      this.upResult.companyId = this.companyId;
-      this.upResult.purchaserName = this.purchaserName;
-      this.upResult.purchaserTaxpayerNumber = this.purchaserTaxpayerNumber;
-      this.upResult.address = this.address;
-      this.upResult.phone = this.phone;
-      this.upResult.purchaserBank = this.purchaserBank;
-      this.upResult.purchaserBankAccount = this.purchaserBankAccount;
-      this.upResult.username = this.username;
-      this.upResult.accessToken = this.accessToken;
-      this.upResult.taxNumber = this.taxNumber;
-      this.upResult.type = this.sendType;
-      this.upResult.category = "增值税电子普通发票";
-      this.upResult.contentType = "商品明细";
-      this.upResult.property = "电子";
+      this.request.email = this.email;
+      this.request.mobile = this.mobile;
+      this.request.companyId = this.companyId;
+      this.request.purchaserName = this.purchaserName;
+      this.request.purchaserTaxpayerNumber = this.purchaserTaxpayerNumber;
+      this.request.address = this.address;
+      this.request.phone = this.phone;
+      this.request.purchaserBank = this.purchaserBank;
+      this.request.purchaserBankAccount = this.purchaserBankAccount;
+      this.request.username = this.username;
+      this.request.accessToken = this.accessToken;
+      this.request.taxNumber = this.taxNumber;
+      this.request.type = this.sendType;
+      this.request.category = "增值税电子普通发票";
+      this.request.contentType = "商品明细";
+      this.request.property = "电子";
       axios.put("https://fapiao-api.easyapi.com/api/default/" + this.username,
-        this.upResult
+        this.request
       ).then(res => {
-        window.parent.postMessage(JSON.stringify(this.upResult), "*");
+        window.parent.postMessage(JSON.stringify(this.request), "*");
       }).catch(error => {
         console.log(error);
       });
