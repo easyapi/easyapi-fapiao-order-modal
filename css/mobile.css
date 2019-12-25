@@ -7,11 +7,9 @@ input {
   width: 10rem;
   height: auto;
   background-color: #ffffff;
-  /* border-bottom: 1px solid #ddd; */
   border-radius: 5px;
   padding: 10px 0;
   height: 10.4rem;
-  overflow-y: auto;
 }
 
 .partOne, .partTwo {
@@ -25,12 +23,8 @@ input {
   padding: 0 0.32rem;
 }
 
-/* .company-imfor>div{
-    justify-content: space-between;
-} */
 .invoice-type {
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
 
 }
@@ -40,8 +34,6 @@ input {
 }
 
 .invoice-type > p > span {
-  /* width: 122px;
-  height: 34px; */
   background-color: #ffffff;
   border-radius: 4px;
   border: solid 1px #ddd;
@@ -104,9 +96,7 @@ input {
 
 .InvoiceRise > span {
   width: 56px;
-  /* height: 15px; */
   font-size: 14px;
-  /* line-height: 15px; */
   color: #333333;
   text-align: right;
   margin-right: 20px;
@@ -121,8 +111,6 @@ input {
   line-height: 34px;
   background-color: #ffffff;
   border-radius: 4px;
-  /* border: solid 1px #dddddd; */
-  /* margin: 5px 0 -5px 0px; */
 }
 
 .InvoiceRise > p > input {
@@ -157,7 +145,6 @@ input {
   margin: 5px 0;
   padding: 0px 5px 5px 5px;
   font-size: 12px;
-  /* width:100%; */
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -181,9 +168,7 @@ input {
 }
 
 .public-r > span:first-child {
-  /* display: inline-block; */
   width: 56px;
-  /* height: 15px; */
   font-size: 14px;
   color: #333333;
   text-align: right;
