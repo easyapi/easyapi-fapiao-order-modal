@@ -24,11 +24,14 @@ var vm = new Vue({
     }
   },
   created() {
-    this.username = this.GetQueryString("username");// 获取用户名
+    //获取用户名
+    this.username = this.GetQueryString("username");
     localStorage.setItem("username", this.username);
-    this.accessToken = this.GetQueryString("accessToken"); // 获取accessToken
+    //获取访问令牌
+    this.accessToken = this.GetQueryString("accessToken");
     localStorage.setItem("accessToken", this.accessToken);
-    this.taxNumber = this.GetQueryString("taxNumber");// 获取taxNumber
+    //获取税号
+    this.taxNumber = this.GetQueryString("taxNumber");
     localStorage.setItem("taxNumber", this.taxNumber);
     this.searchCompanies();
     this.getUser();
@@ -78,11 +81,9 @@ var vm = new Vue({
           }
         }).then(res => {
           this.searchList = res.data.content;
-          console.log(this.searchList);
           this.dropDownShow = true;
         }).catch(error => {
           console.log(error)
-          //   MessageBox('提示', error.response.data.message);
         });
       }
     },
@@ -150,15 +151,25 @@ var vm = new Vue({
     },
     // 更新用户的默认抬头、接收方式
     saveAndUpload() {
-      this.request.email = this.email;
-      this.request.mobile = this.mobile;
+      if (this.email.trim() === '') {
+        alert("邮箱不能为空");
+        document.getElementById("submit").href = "javascript:;"
+        return;
+      }
+      if (this.purchaserName.trim() === '') {
+        alert("发票抬头不能为空");
+        document.getElementById("submit").href = "javascript:;"
+        return;
+      }
+      this.request.email = this.email.trim();
+      this.request.mobile = this.mobile.trim();
       this.request.companyId = this.companyId;
-      this.request.purchaserName = this.purchaserName;
-      this.request.purchaserTaxpayerNumber = this.purchaserTaxpayerNumber;
-      this.request.address = this.address;
-      this.request.phone = this.phone;
-      this.request.purchaserBank = this.purchaserBank;
-      this.request.purchaserBankAccount = this.purchaserBankAccount;
+      this.request.purchaserName = this.purchaserName.trim();
+      this.request.purchaserTaxpayerNumber = this.purchaserTaxpayerNumber.trim();
+      this.request.address = this.address.trim();
+      this.request.phone = this.phone.trim();
+      this.request.purchaserBank = this.purchaserBank.trim();
+      this.request.purchaserBankAccount = this.purchaserBankAccount.trim();
       this.request.username = this.username;
       this.request.accessToken = this.accessToken;
       this.request.taxNumber = this.taxNumber;
