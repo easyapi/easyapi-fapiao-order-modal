@@ -22,20 +22,26 @@
 
     <div class="tabChange">
       <span>抬头类型</span>
-      <div @click="tabChange(0)">
+      <div @click="tabChange('企业')">
         <p>
-          <span v-bind:class="{ selected:0==current}"></span>
+          <span v-bind:class="{ selected:'企业'==invoiceType}"></span>
         </p>
-        <span>单位</span>
+        <span>企业</span>
       </div>
-      <div @click="tabChange(1)">
+      <div @click="tabChange('个人')">
         <p>
-          <span v-bind:class="{ selected:1==current}"></span>
+          <span v-bind:class="{ selected:'个人'==invoiceType}"></span>
         </p>
-        <span>个人</span>
+        <span>个人/事业单位</span>
       </div>
     </div>
-    <div v-if="willShow" class="company-imfor">
+    <div v-if="invoiceType =='个人'" class="company-imfor">
+      <div class="public-r">
+        <span>发票抬头</span>
+        <input type="text" v-model="purchaserName" placeholder="请输入抬头">
+      </div>
+    </div>
+    <div v-if="invoiceType =='企业'" class="company-imfor">
       <div class="InvoiceRise">
         <span>发票抬头</span>
         <p>
@@ -43,7 +49,7 @@
           <i @click="dropDown"></i>
         </p>
         <div class="drop-down" v-if="dropDownShow">
-          <p v-for="(item,index) in searchList" :key="index" @click="chooseCompanyTitle(index)"
+          <p v-for="(item,index) in companyList" :key="index" @click="chooseCompanyTitle(index)"
              v-html="lineFeed(item)"></p>
         </div>
       </div>
